@@ -2,7 +2,6 @@ package app.management.prototype;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
-import java.nio.file.*;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,15 +22,17 @@ public class SysFunc {
     
 // MENUS    
 public void mainMenu() throws IOException
-{
+{   
+    Account aA = new Account(activeAccount);
     Scanner in = new Scanner(System.in);    
+    System.out.println("Logged in as "+aA.getName());
     System.out.println("-----------------------");
     System.out.println("What do you want to manage?");
         System.out.println("1.Accounts");
         System.out.println("2.Apps");
         System.out.println("Type a number to select an option");
         System.out.println("-----------------------");
-        String choice = i.nextLine();
+        String choice = in.nextLine();
         switch (choice) {
             case "1":
                 accMng();
