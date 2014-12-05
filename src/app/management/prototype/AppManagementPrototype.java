@@ -17,11 +17,11 @@ public class AppManagementPrototype {
         System.out.println("Current relative path is: " + s);
         System.out.println("Please type 'new' to create a new account, or enter your account number to Log In.");
         String ch = i.nextLine();
-        //try{
+        try{
         if (ch == "new"){ tSys.createAcc(); } 
         else { tSys.activeAccount = Integer.parseInt(ch);  tSys.mainMenu();} }
-        //catch(IOException e) { System.out.println("That Account does not exist");    }
-        //finally {System.out.println("That Account does not exist");}
+        catch(IOException e) { System.out.println("That Account does not exist");    }
+        finally {System.out.println("That Account does not exist");}
        }
-   // }
+   }
 

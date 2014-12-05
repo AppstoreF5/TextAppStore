@@ -62,12 +62,9 @@ public void buildAccount(int fn)
 	public void setAdmin()
         {
             if (this.name == "admin")
-            {
-                this.admin = true;
-            } else {
-                this.admin = false;
-            }
-        }
+            { this.admin = true; } 
+            else { this.admin = false;}
+         }
 	//Getters
 	public String getName(){ 
 		return this.name; 
