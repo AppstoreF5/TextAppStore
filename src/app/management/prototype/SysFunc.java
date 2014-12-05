@@ -181,6 +181,8 @@ public void createAcc() throws IOException
                     writeToFile(cNum, n, "acc");
                     writeToFile(cNum, a, "acc");
                     writeToFile(cNum, p, "acc");
+                    writeToFile(cNum , "0", "acc");
+                    writeToFile(cNum, "0", "acc");        
                     System.out.println("Your account has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfAccounts++;

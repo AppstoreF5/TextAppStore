@@ -27,7 +27,7 @@ public void buildAccount(int fn)
     FileReader fr = new FileReader(accDir+fn+".txt");
     BufferedReader textReader = new BufferedReader(fr);
     
-    int numberOfLines = 3;
+    int numberOfLines = 6;
     String[] textData = new String[numberOfLines];
     for (int i = 0; i < numberOfLines; i++) {
         
@@ -37,6 +37,9 @@ public void buildAccount(int fn)
     this.name = textData[0];
     this.address = textData[1];
     this.profession = textData[2];
+    this.appsPurchased = Integer.parseInt(textData[3]);
+    this.amountToBePaid = Double.parseDouble(textData[4]);
+    setAdmin();
     textReader.close();
       
   }

@@ -14,7 +14,7 @@ public class AppManagementPrototype {
         Scanner i = new Scanner(System.in);
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        System.out.println("Current relative path is: " + s);
+        System.out.println("Running from: " + s);
         System.out.println("Please type 'new' to create a new account, or enter your account number to Log In.");
         String ch = i.nextLine();
         try{
