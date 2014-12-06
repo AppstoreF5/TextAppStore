@@ -307,9 +307,6 @@ public void createAcc(boolean newacc) throws IOException
                     else if(newacc) {System.out.println("Please log in with your new account number.");logIn(); }
                     }
                     
-                
-
-       
 public void writeToFile(int file, String textLine, String t) throws IOException
 {
     String path;
