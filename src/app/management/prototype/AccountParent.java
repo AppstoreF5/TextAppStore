@@ -12,7 +12,7 @@ public abstract class AccountParent {
 	private int appsUsedFree;
 	private int appsPurchased;
 	protected double amountToBePaid;
-        private String type;
+        private String perms;
         Path currentRelativePath = Paths.get("");
         public String accDir = currentRelativePath.toAbsolutePath().toString()+"\\Accounts\\";
        
@@ -39,10 +39,15 @@ public void buildAccount(int fn)
     this.profession = textData[2];
     this.appsPurchased = Integer.parseInt(textData[3]);
     this.amountToBePaid = Double.parseDouble(textData[4]);
-    
+    this.perms = textData[5];
     textReader.close();
       
   }
+
+public void buyAll()
+{
+  this.amountToBePaid = 0;
+}
 //Setters	
 	public void setName(String n){
 		this.name = n;
@@ -62,10 +67,7 @@ public void buildAccount(int fn)
 	public void setAmountToBePaid(double amountp){
 		this.amountToBePaid = amountp;
 	}
-	public void setAdmin(String a)
-        {
-           this.type = a;
-         }
+	
 	//Getters
 	public String getName(){ 
 		return this.name; 
@@ -84,5 +86,9 @@ public void buildAccount(int fn)
 	}
 	public double getAmountToBePaid(){ 
 		return this.amountToBePaid; 
+	}
+        
+        public String getPerms(){ 
+		return this.perms; 
 	}
 }

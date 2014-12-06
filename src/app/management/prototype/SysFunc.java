@@ -43,11 +43,81 @@ public void adminMenu() throws IOException
             default:
             System.out.println("Not a valid option.");
                     System.out.println("-----------------------");
-                    mainMenu();
+                    adminMenu();
                 break;
         }
 }
     
+public void custMenu() throws IOException
+{
+    Account aA = new Account(activeAccount);
+    Scanner in = new Scanner(System.in);    
+    System.out.println("Logged in as "+aA.getName()+" with £"+aA.getAmountToBePaid()+" to be paid");
+    System.out.println("-----------------------");
+    System.out.println("Main Menu?");
+        System.out.println("1.Edit Account");
+        System.out.println("2.View all apps");
+        System.out.println("3.View specific app");
+        System.out.println("4.Buy all Apps in Basket");
+        System.out.println("Type a number to select an option");
+        System.out.println("-----------------------");
+        String choice = in.nextLine();
+        switch (choice) {
+            case "1":
+                custEditAcc(activeAccount);
+                break;
+            case "2":
+                listApps();
+                break;
+            case "3":
+               searchApp();
+                break;
+            case "4":
+               aA.buyAll();
+                break;
+            default:
+            System.out.println("Not a valid option.");
+                    System.out.println("-----------------------");
+                    adminMenu();
+                break;
+}
+}
+
+public void devMenu() throws IOException
+{
+    Account aA = new Account(activeAccount);
+    Scanner in = new Scanner(System.in);    
+    System.out.println("Logged in as "+aA.getName()+" with £"+aA.getAmountToBePaid()+" to be paid");
+    System.out.println("-----------------------");
+    System.out.println("Main Menu?");
+        System.out.println("1.Edit Account");
+        System.out.println("2.View all apps");
+        System.out.println("3.View specific app");
+        System.out.println("4.Create new App");
+        System.out.println("Type a number to select an option");
+        System.out.println("-----------------------");
+        String choice = in.nextLine();
+        switch (choice) {
+            case "1":
+                custEditAcc(activeAccount);
+                break;
+            case "2":
+                listApps();
+                break;
+            case "3":
+               searchApp();
+                break;
+            case "4":
+               createApp();
+                break;
+            default:
+            System.out.println("Not a valid option.");
+                    System.out.println("-----------------------");
+                    adminMenu();
+                break;
+}
+}
+
 public void accMng() throws IOException
 {
     Scanner in = new Scanner(System.in);  
@@ -64,7 +134,7 @@ public void accMng() throws IOException
            String choice = in.nextLine();
         switch (choice) {
             case "1":
-                createAcc();
+                createAcc(false);
                 break;
             case "2":
                 deleteAcc();
@@ -82,7 +152,7 @@ public void accMng() throws IOException
                 accMng();
                 break;
             case "6":
-                mainMenu();
+                adminMenu();
                 break;
             default:
                 System.out.println("-----------------------");
@@ -126,7 +196,7 @@ public void appMng() throws IOException
                 appMng();
                 break;
             case "6":
-                mainMenu();
+                adminMenu();
                 break;
             default:
                 System.out.println("Not a valid option.");
@@ -139,6 +209,7 @@ public void appMng() throws IOException
 //Creators
 public void createApp() throws IOException
 {
+    Account aA = new Account(activeAccount);
     int cNum = numOfApps;
                     Scanner in = new Scanner(System.in);                   
                     System.out.println("What is the App's name?");
@@ -162,12 +233,18 @@ public void createApp() throws IOException
                     System.out.println("Your App has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfApps++;
-                    appMng();
+                    if (aA.getPerms() == "d")
+                    {devMenu();}
+                    else if(aA.getPerms()== "c")
+                    {custMenu();} 
+                    else 
+                    {appMng();}    
                     }
    
-public void createAcc() throws IOException
+public void createAcc(boolean newacc) throws IOException
 {
-     int cNum = numOfAccounts;
+    Account aA = new Account(activeAccount); 
+    int cNum = numOfAccounts;
                     Scanner in = new Scanner(System.in);          
                     System.out.println("What is your Full Name?");
                     String n = in.nextLine();
@@ -185,14 +262,22 @@ public void createAcc() throws IOException
                     writeToFile(cNum , "0", "acc");
                     writeToFile(cNum, "0", "acc");
                     if (cd.equalsIgnoreCase("yes"))
-                    { writeToFile(cNum, "developer", "acc"); }
+                    { writeToFile(cNum, "d", "acc"); }
                     else 
-                    { writeToFile(cNum, "customer", "acc"); }
+                    { writeToFile(cNum, "c", "acc"); }
                     System.out.println("Your account has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfAccounts++;
-                    accMng();
-                }
+                    if (aA.getPerms() == "d")
+                    {devMenu();}
+                    else if(aA.getPerms()== "c")
+                    {custMenu();} 
+                    else if(aA.getPerms()=="a")
+                    {appMng();}
+                    else if(newacc) {System.out.println("Please log in with your new account number.");}
+                    }
+                    
+                
        
 public void writeToFile(int file, String textLine, String t) throws IOException
 {
@@ -306,6 +391,70 @@ public void editAcc() throws FileNotFoundException, IOException
    accMng();
 }
 
+public void custEditAcc(int aa) throws FileNotFoundException, IOException
+{
+    System.out.println("Editing account number "+aa);
+    Scanner i = new Scanner(System.in);
+    String editLine = "hi";
+    int ach = aa;
+    String path = accDir+ach+".txt";
+    String newline = System.getProperty("line.separator");
+    
+            
+            FileReader fr1 = new FileReader(path);
+            BufferedReader br1 = new BufferedReader(fr1);
+            
+
+            int numberOfLines = 3;
+            String[] textData = new String[numberOfLines];
+            for (int b = 0; b < numberOfLines; b++) {        
+            textData[b] = br1.readLine(); }
+            Scanner in = new Scanner(System.in);
+            System.out.println("-----------------------");
+            System.out.println("Name = "+textData[0]+" Address = "+textData[1]+" Occupation = "+textData[2]);
+            System.out.println("-----------------------");
+            br1.close();
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+            System.out.println("What do you want to edit?");
+            System.out.println("type 1 for name");
+            System.out.println("type 2 for Address");
+            System.out.println("type 3 for Occupation");
+            String inc = in.nextLine();
+            System.out.println("What would you like to change it to?");
+            String editMade = in.nextLine();
+            switch (inc) {
+            case "1":
+                editLine = editMade + newline + textData[1] + newline + textData[2];
+                break;
+            case "2":
+                editLine = textData[0] + newline + editMade + newline + textData[2];
+                break;
+            case "3":
+                editLine = textData[0] + newline + textData[1] + newline + editMade;
+                break;
+        }
+                  
+           
+
+            
+            br1.close();
+            
+            bw.write(editLine);
+            bw.flush();
+            bw.close();
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
+            for (int b = 0; b < numberOfLines; b++) {
+            textData[b] = br.readLine(); }
+            System.out.println("-----------------------");
+            System.out.println(textData[0]);
+            System.out.println(textData[1]);
+            System.out.println(textData[2]);
+            System.out.println("-----------------------");
+   custMenu();
+}
+
 public void editApp()
 {
     // TBC
@@ -342,7 +491,10 @@ public void searchAcc() throws IOException
     accMng();}
     }
 
-
+public void listApps()
+{
+    // TODO 
+}
 
 public void searchApp() throws IOException
 {
