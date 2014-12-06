@@ -151,6 +151,13 @@ public void createApp() throws IOException
                     String c = in.nextLine();
                     double pt = (int)(Math.random()*10000);
                     String pop = Double.toString(pt);
+                    System.out.println("What is the type of the App?");
+                    String t = in.nextLine();
+                    System.out.println("Is the App for free or for purchasing? Type 1 for Free and 2 for Purchasing");
+                    int ifp = in.nextInt();
+                    String iff;
+                    if(ifp==1){iff="Free";}
+                    else {iff="Purchasing";}
                     
                     File f = new File(appDir+cNum);
                     do { cNum ++;} while(f.exists());
@@ -159,6 +166,8 @@ public void createApp() throws IOException
                     writeToFile(cNum, p, "app");
                     writeToFile(cNum, c, "app");
                     writeToFile(cNum, pop, "app");
+                    writeToFile(cNum, t, "app");
+                    writeToFile(cNum, iff, "app");
                     System.out.println("Your App has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfApps++;
@@ -187,7 +196,7 @@ public void createAcc() throws IOException
                     System.out.println("-----------------------");
                     numOfAccounts++;
                     accMng();
-                }
+}
        
 public void writeToFile(int file, String textLine, String t) throws IOException
 {
