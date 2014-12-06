@@ -21,7 +21,7 @@ public class SysFunc {
     Scanner i = new Scanner(System.in);
     
 // MENUS    
-public void mainMenu() throws IOException
+public void adminMenu() throws IOException
 {   
     Account aA = new Account(activeAccount);
     Scanner in = new Scanner(System.in);    
@@ -175,14 +175,19 @@ public void createAcc() throws IOException
                     String a = in.nextLine();
                     System.out.println("What is your your Occupation?");
                     String p = in.nextLine();
-                    
+                    System.out.println("Is this a Developer account?(yes / no) ");
+                    String cd = in.nextLine();
                     File f = new File(accDir+cNum);
                     do { cNum ++;} while(f.exists());
                     writeToFile(cNum, n, "acc");
                     writeToFile(cNum, a, "acc");
                     writeToFile(cNum, p, "acc");
                     writeToFile(cNum , "0", "acc");
-                    writeToFile(cNum, "0", "acc");        
+                    writeToFile(cNum, "0", "acc");
+                    if (cd.equalsIgnoreCase("yes"))
+                    { writeToFile(cNum, "developer", "acc"); }
+                    else 
+                    { writeToFile(cNum, "customer", "acc"); }
                     System.out.println("Your account has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfAccounts++;
