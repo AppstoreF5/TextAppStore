@@ -206,6 +206,26 @@ public void appMng() throws IOException
         }
    }
 
+public void logIn()
+{
+    System.out.println("Please type 'new' to create a new account, or press enter to Log In.");
+        try{
+        String ch = i.nextLine();
+        if (ch.equalsIgnoreCase("new")){ createAcc(true); } 
+        else { System.out.println("What is your account number?");
+            activeAccount = i.nextInt(); Account aA = new Account(activeAccount);
+            if (aA.getPerms().equalsIgnoreCase("c"))
+          {custMenu();}
+        else if(aA.getPerms().equalsIgnoreCase("d"))
+          {devMenu();}
+        else if(aA.getPerms().equalsIgnoreCase("a"))
+          {adminMenu();}}
+          
+        }
+        catch(IOException e) { System.out.println("That Account does not exist"); logIn();   }
+        finally {System.out.println("That Account does not exist"); logIn(); }
+       }
+
 //Creators
 public void createApp() throws IOException
 {
@@ -274,7 +294,7 @@ public void createAcc(boolean newacc) throws IOException
                     {custMenu();} 
                     else if(aA.getPerms()=="a")
                     {appMng();}
-                    else if(newacc) {System.out.println("Please log in with your new account number.");}
+                    else if(newacc) {System.out.println("Please log in with your new account number.");logIn(); }
                     }
                     
                 
