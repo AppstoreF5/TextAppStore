@@ -297,7 +297,7 @@ public void createAcc(boolean newacc) throws IOException
                     System.out.println("Your account has been created with the number "+cNum+".");
                     System.out.println("-----------------------");
                     numOfAccounts++;
-//<<<<<<< HEAD
+
 
                     if (aA.getPerms() == "d")
                     {devMenu();}
@@ -308,11 +308,7 @@ public void createAcc(boolean newacc) throws IOException
                     else if(newacc) {System.out.println("Please log in with your new account number.");logIn(); }
                     }
                     
-//=======
-                   // accMng();
-//}
-       
-//>>>>>>> origin/master
+
 public void writeToFile(int file, String textLine, String t) throws IOException
 {
     String path;
