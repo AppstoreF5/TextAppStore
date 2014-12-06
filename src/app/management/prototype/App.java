@@ -15,8 +15,9 @@ public final class App
     private  String appDesc;
     private  String dev;
     private  int pop;
-    private  boolean type = false; //Does the app cost money
+    private  boolean ifAppFree = false; //Does the app cost money
     private  double cost;
+    private String type;
     Path currentRelativePath = Paths.get("");
     public String appDir = currentRelativePath.toAbsolutePath().toString()+"\\Apps\\";;
     
@@ -59,16 +60,18 @@ public final class App
     {this.dev = appDv;}
     public  void setPop(int appP)
     {this.pop = appP;}
-    public  void setType()
+    public  void setIfAppFree()
     {if (this.cost <= 0)
-    {this.type = true;}
+    {this.ifAppFree = true;}
     else
-    {this.type = false;}}
+    {this.ifAppFree = false;}}
     public void setCost(double appC)
     {if (appC > 0)
     {this.cost = appC;}
     else
     {this.cost = 0;}}
+    public  void setType(String type)
+    {this.type = type;}
     //Getters
     public  String getAppName()
     { return this.appName; }
@@ -78,9 +81,11 @@ public final class App
     { return this.dev; }
     public  int getPop()
     { return this.pop; }
-    public  boolean getType()
-    { return this.type; }
+    public  boolean getIfAppFree()
+    { return this.ifAppFree; }
     public  double getCost()
     { return this.cost; }
+    public  String getType()
+    { return this.type; }
 }
 
